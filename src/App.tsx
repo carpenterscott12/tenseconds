@@ -7,7 +7,7 @@ import { DataInputGame } from './mini-games/DataInput.game';
 
 function App() {
   return (
-    <body>
+    <>
       <h1 id="PageTitle">Ten Seconds</h1>
       <button id="StartButton">Start your first job</button>
       <div id="JobTitleContainer" className="text-container">
@@ -40,7 +40,7 @@ function App() {
       <TestAGame Game={DataInputGame} meta={"Data Input"} />
       <TestAGame Game={TopTapGame} meta={"Top Tap"} />
 
-    </body>
+    </>
   );
 }
 
