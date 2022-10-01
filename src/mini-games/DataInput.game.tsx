@@ -1,7 +1,8 @@
 import React from "react";
-import { GameProps, GameWrapper, TEN_SECONDS } from "./gamebase";
+import { GameProps, GameWrapper } from "./gamebase";
 
-const DataInput = ({onCompletedCallback}: GameProps) => {
+/** Type the line to complete the game */
+const DataInput = ({onCompletedCallback, difficulty}: GameProps) => {
   const goal = React.useMemo(() => "this", []);
 
   return <>

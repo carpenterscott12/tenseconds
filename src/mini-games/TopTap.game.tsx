@@ -1,7 +1,8 @@
 import React from "react";
 import { GameProps, GameWrapper } from "./gamebase";
 
-const TopTap = ({onCompletedCallback}: GameProps) => {
+/** Tap the button to complete the game */
+const TopTap = ({onCompletedCallback, difficulty}: GameProps) => {
   const goal = React.useMemo(() => 15, []);
   const [number, setNumber] = React.useState(0);
 
