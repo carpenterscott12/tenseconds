@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1 id="PageTitle">Ten Seconds</h1>
+    <button id="StartButton">Start your first job</button>
+    <div id="JobTitleContainer" class="text-container">
+        <div id="JobTitleLabel" class="inline-item">Job Title:</div>
+        <div id="JobTitleValue" class="inline-item">Intern</div>
+    </div>
+    <div id="TotalTasksContainer" class="text-container">
+        <div id="TotalTasksLabel" class="inline-item">Total Tasks Completed:</div>
+        <div id="TotalTasksCount" class="inline-item">0</div>
+    </div>
+    <div id="JobTaskList">
+        <div id="JobTask0">
+            <div id="JobTaskTitle0">Title 0</div>
+            <div id="JobTaskDescription0">Description 0</div>
+            <div id="FinishedCheckmark0">X</div>
+        </div>
+        <div id="JobTask1">
+            <div id="JobTaskTitle1">Title 1</div>
+            <div id="JobTaskDescription1">Description 1</div>
+            <div id="FinishedCheckmark1">X</div>
+        </div>
+        <div id="JobTask2">
+            <div id="JobTaskTitle2">Title 2</div>
+            <div id="JobTaskDescription2">Description 2</div>
+            <div id="FinishedCheckmark2">X</div>
+        </div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+        const lastKeyWasPressed = "lastKeyWasPressed";
+        const inProgress = "inProgress";
+        const lastKeyWasPressed = "wrongKeyWasPressed";
+        const maxTaskID = 2;
+
+        class Job {
+            constructor(jobTitle, totalTasksCompleted, currentTaskList) {
+                this.jobTitleValueELement = $("#JobTitleValue");
+                this.totalTasksCountElement = $("#TotalTasksCount");
+                
+                this.updateJobTitle(jobTitle);
+                this.updateTotalTasksCompleted(totalTasksCompleted);
+                this.updateCurrentTaskList(currentTaskList);
+                this.currentTaskIndex = 0;
+            }
+
+            pressKey(keyCode) {
+                let keyPressResult = this.currentTaskList[this.currentTaskIndex].pressKey(keyCode);
+                if (keyPressResult === lastKeyWasPressed) {
+                    this.finishTask(this.currentTaskIndex);
+                }
+                else if (keyPressResult === inProgress) {
+
+                }
+                else {
+                    // Wrong key was pressed
+
+                }
+            }
+
+            updateJobTitle(newJobTitle) {
+                this.jobTitle = newJobTitle;
+                jobTitleValueELement.html(newJobTitle);
+            }
+
+            updateTotalTasksCompleted(totalTasksCompleted) {
+                this.totalTasksCompleted = totalTasksCompleted;
+                totalTasksCountElement.html(totalTasksCompleted);
+            }
+
+            updateCurrentTaskList(currentTaskList) {
+                currentTaskList[0].activateTask();
+                this.currentTaskList = currentTaskList;
+                // for(let i = 0; i < maxTaskID; i++) {
+                    
+                    
+                // }
+            }
+
+            finishTask(taskID) {
+                let taskToFinish = this.currentTaskList.find(task => task.taskID === taskID);
+                taskToFinish.finish();
+                this.totalTasksCompleted++;
+                if (this.taskID + 1 > maxTaskID) {
+                    // Advance to the next day
+                    this.currentTaskList = this.generateNewTaskList();
+                    this.currentTaskIndex = 0;
+                    
+                }
+            }
+
+            generateNewTaskList() {
+                //TODO: Generate new task list
+                return [];
+            }
+        }
+
+        class JobTask {
+            constructor(taskID, taskName, taskDescription, requiredKeys) {
+                this.taskID = taskID;
+                this.taskName = taskName;
+                this.taskDescription = taskDescription;
+                this.requiredKeys = requiredKeys;
+                this.requiredKeysIndex = 0;
+                this.taskComplete = false;
+                this.isActiveTask = false;
+            }
+
+            pressKey(keyCode) {
+                if (this.requiredKeys[this.requiredKeysIndex] == keyCode) {
+                    if (this.requiredKeys.length == this.requiredKeysIndex + 1) {
+                        return lastKeyWasPressed;
+                    }
+                    return inProgress;
+                }
+                return wrongKeyWasPressed;
+            }
+
+            activateTask() {
+                this.isActiveTask = true;
+            }
+
+            finish() {
+                this.taskComplete = true;
+                this.isActiveTask = false;
+            }
+        }
+
+        $(document).ready(function () {
+            let startButton = $("#StartButton");
+            startButton.click(function () 
+            { 
+                console.log("Clicked!"); 
+            });
+        });
+    </script>
+</body>
+
+</html>
