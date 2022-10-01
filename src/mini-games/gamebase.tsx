@@ -7,6 +7,19 @@ export type GameStatus = "COMPLETE" | "FAILED";
 /** The possible difficulties of a game. */
 export type GameDifficulty = 0;
 
+export class GameManager {
+  constructor(
+    private _component: React.FunctionComponent<GameProps>,
+    public name: string
+  ) {
+    
+  }
+
+  component(props: GameProps): React.ReactNode {
+    return (props) => <GameWrapper Game={this._component} {...props} />;
+  }
+}
+
 export interface GameProps {
   onCompletedCallback: (didComplete: GameStatus) => void;
   difficulty: GameDifficulty;
