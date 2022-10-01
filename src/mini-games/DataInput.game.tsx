@@ -1,20 +1,16 @@
 import React from "react";
-import { GameProps, TEN_SECONDS } from "./gamebase";
+import { GameProps, GameWrapper, TEN_SECONDS } from "./gamebase";
 
-export const DataInput = ({onCompletedCallback}: GameProps) => {
-  const goal = React.useMemo(() => "You should type this", []);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      onCompletedCallback("FAILED");
-    }, TEN_SECONDS);
-  }, [onCompletedCallback]);
+const DataInput = ({onCompletedCallback}: GameProps) => {
+  const goal = React.useMemo(() => "this", []);
 
   return <>
-    {goal}
+    <label>You should type {goal}</label>
     <input onChange={(event) => {
       if (event.target.value === goal)
         onCompletedCallback("COMPLETE");
     }}></input>  
   </>;
 }
+
+export const DataInputGame = (props: GameProps) => <GameWrapper Game={DataInput} {...props} />

@@ -2,8 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './css/main.css';
 import { TestAGame } from './mini-games/gamebase';
-import { TopTap } from './mini-games/TopTap.game';
-import { DataInput } from './mini-games/DataInput.game';
+import { TopTapGame } from './mini-games/TopTap.game';
+import { DataInputGame } from './mini-games/DataInput.game';
 
 function App() {
   return (
@@ -37,8 +37,8 @@ function App() {
       </div>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-      <TestAGame Game={TopTap} />
-      <TestAGame Game={DataInput} />
+      <TestAGame Game={DataInputGame} meta={"Data Input"} />
+      <TestAGame Game={TopTapGame} meta={"Top Tap"} />
 
     </body>
   );
