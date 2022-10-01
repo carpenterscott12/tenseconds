@@ -6,15 +6,15 @@ export const DataInput = ({onCompletedCallback}: GameProps) => {
 
   React.useEffect(() => {
     setTimeout(() => {
-      onCompletedCallback(true);
+      onCompletedCallback("FAILED");
     }, TEN_SECONDS);
   }, [onCompletedCallback]);
-  
+
   return <>
     {goal}
     <input onChange={(event) => {
       if (event.target.value === goal)
-        onCompletedCallback(true);
+        onCompletedCallback("COMPLETE");
     }}></input>  
   </>;
 }
